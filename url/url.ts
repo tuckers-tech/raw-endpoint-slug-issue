@@ -11,11 +11,13 @@ export const get = api(
     return { id };
   }
 );
+
 // Get retrieves the original URL for the id.
-export const getUrl2 = api(
+export const getUrl2 = api.raw(
   { expose: true, auth: false, method: "GET", path: "/url2/:id" },
-  async ({ id }: { id: string }): Promise<ReturnValue> => {
-    return { id };
+  async (req, resp): Promise<void> => {
+    resp.writeHead(200, { "Content-Type": "text/plain" });
+    resp.end("Hello, raw world!");
   }
 );
 
